@@ -1,0 +1,30 @@
+import java.io.Serializable;
+import java.util.*;
+public class CompanyFiles implements Serializable {
+/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+Scanner sc=new Scanner(System.in);
+
+if(sc.nextInt()==1) {
+	
+}
+if(sc.nextInt()==2) {
+	
+}
+if(sc.nextInt()==3) {
+	
+}	
+if(sc.nextInt()==4) {
+	
+}
+if(sc.nextInt()==5) {
+	
+}	
+if(sc.nextInt()==6) {
+	
+}	
+}	
+	
+}

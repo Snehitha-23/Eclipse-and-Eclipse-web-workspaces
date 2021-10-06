@@ -1,0 +1,171 @@
+import java.util.*;
+import java.io.*;
+public class CompanyLockers {
+
+	public static void main(String[] args) {
+		System.out.println("--------------------------------------------------------------");
+		System.out.println("------------------------------------------------------------------------");
+		System.out.println( "-----------*--*--*--*--*--*--*--*--*  WELCOME:) TO LOCKME.COM *--*--*--*--*--*--*--*-----------");
+		System.out.println("------------------------------------------------------------------------");
+		System.out.println("--------------------------------------------------------------");
+		System.out.println("CHOOSE 1 FOR NEW USERS AND 2 FOR REGISTERED USERS");
+		//For new users to register
+		System.out.println("1.REGISTRATION");
+		//For already registered users to login into their account
+		System.out.println("2.LOGIN IN");
+		Scanner sc=new Scanner(System.in);
+		if(sc.nextInt()==1)
+		{
+			System.out.println("Opening registeration page...");
+			registeration();
+		}
+		else {
+			System.out.println("LOGIN TO YOUR ACCOUNT");
+			System.out.println("Username:");
+			String username=sc.next();
+			System.out.println("Password:");
+			String password=sc.next();
+			 loginVerify(username,password);
+			
+		}
+	}
+	static Map<String,String> loginmap =new HashMap<String,String>();
+		public static void loginVerify(String username, String password) {
+	boolean verify=false;
+	Scanner sc=new Scanner(System.in);
+	if(loginmap.containsKey(username)) {
+		
+		if(loginmap.containsValue(password)) {
+			verify=true;
+			}
+		}
+	if(verify==true) {
+		System.out.println("Login successful");
+	System.out.println("--------------------WELCOME   "+username+"-----------------------");
+		String path=username;
+		File filedir=new File("C:\\snehitha\\LockerFiles\\"+path);
+		path="C:\\snehitha\\LockerFiles\\"+path;
+		boolean bool=filedir.mkdir();
+		if(bool)
+	System.out.println("Directory created successfully");
+		//for ascending order
+		List listfile=Arrays.asList(filedir.list());
+		Collections.sort(listfile);
+			
+		
+	System.out.println("----------YOU MAY SELECT ANY OPTION FROM BELOW MENU--------------");
+	System.out.println("1.Adding a file  2.To search a file  3.To delete a file  4.Back");
+	int a=sc.nextInt();
+	switch(a) {
+	case 1:CompanyFiles.AddFile(path);
+	
+	case 2:
+		
+	case 3:
+		
+	case 4:
+		
+	default:	
+	}
+	
+	
+	
+	}
+	else
+	{
+		System.out.println("Invalid Username or password");
+		System.out.println("Username:");
+		String username1=sc.next();
+		System.out.println("Enter Password:");
+		String password1=sc.next();
+		loginVerify(username1,password1);
+	}
+	}
+	
+	
+
+		public static void registeration() {
+        System.out.println("--------------------------------------------------------------");
+		System.out.println("------------------------------------------------------------------------");
+		System.out.println( "-----------*--*--*--*--*--*--*--*--*  WELCOME:)  *--*--*--*--*--*--*--*-----------");
+		System.out.println("------------------------------------------------------------------------");
+		System.out.println("--------------------------------------------------------------");
+		System.out.println("                            *****REGISTERATION PAGE******                            ");
+      	System.out.println("INSTRUCTIONS:");
+		System.out.println("User name: user name should have minimum of five letters in lowercase");
+		System.out.println("Password: password must be eight charcaters long and must contain one capital letter,number,special character.");
+		userDetails();
+		}
+	 private static void userDetails() {
+			// TODO Auto-generated method stub
+		    boolean check;
+			do {
+			Scanner sc=new Scanner(System.in);
+			System.out.println("Enter Username:");
+			String username=sc.next();
+			System.out.println("Enter Password:");
+			String password=sc.next();
+			System.out.println("--------------------------   Validating the inputs   ---------------------");
+		    check=validation(username,password);
+			}while(check==false);
+				  
+		}
+
+	static boolean validation(String username,String password) {
+		boolean valid=true;
+		if(username.length()!=8) {
+	        	System.out.println("username must be eight characters in length");
+	        	valid=false;
+	        }
+		if(password.length()!=8)
+		{
+			System.out.println("Password should be eight characters in length");
+			valid=false;
+		}
+		String upperCaseChars="(.*[A-Z].*)";
+		if(!password.matches(upperCaseChars)) {
+		System.out.println("Password must contain a UPPER CASE letter");	
+		valid=false;
+		}
+		 String numbers = "(.*[0-9].*)";
+        if (!password.matches(numbers))
+        {
+                System.out.println("Password should contain atleast one number.");
+                valid = false;
+        }
+        String specialChars = "(.*[,~,!,@,#,$,%,^,&,,(,),-,_,=,+,[,{,],},|,;,:,<,>,/,?].*)";
+        if (!password.matches(specialChars))
+        {
+                System.out.println("Password should contain atleast one special character");
+                valid = false;
+        }
+        
+        if (valid)
+        {
+        	
+        	if(loginmap.containsKey(username)) {
+        		System.out.println("That username is already used");
+        	userDetails();
+        	}
+        	loginmap.put(username, password);
+                System.out.println("REGISTRATION SUCCESSFUL");
+                System.out.println("Login");
+                //after successful registration to login into their account
+                Scanner sc=new Scanner(System.in);
+                System.out.println("Username:");
+                String name=sc.next();
+                System.out.println("Password:");
+    			String pass=sc.next();
+    			 loginVerify(name,pass);
+    			 return valid;
+        }
+        else
+        {
+        	return valid;
+        }
+	}
+
+	
+	 
+
+}

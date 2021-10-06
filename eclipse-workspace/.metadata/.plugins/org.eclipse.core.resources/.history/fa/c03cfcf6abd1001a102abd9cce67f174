@@ -1,0 +1,18 @@
+import java.io.*;
+import java.util.*;
+public class CompanyFiles  {
+public static void AddFile(String path) throws IOException {
+	System.out.println("Enter the filename to be created");
+	//System.out.println(path);
+	Scanner scan=new Scanner(System.in);
+	String filename=scan.next();
+	File file=new File("path\\"+filename);
+	if(file.exists())
+		System.out.println("File already exists");
+	else {
+		System.out.println("File doesnot exists");
+		file.createNewFile();
+		
+	}
+}
+}	
